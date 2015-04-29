@@ -21,8 +21,8 @@ public class UserController {
 	}
 	
 	@RequestMapping("/users/${id}")
-	public String detail(Model model, @PathVariable int id){
-		model.addAttribute("user",userService.getUserById(id));
+	public String detail(Model model, @PathVariable long id){
+		model.addAttribute("user",userService.find(id));
 		return "user-details";
 	}
 	

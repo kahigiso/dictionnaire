@@ -4,25 +4,25 @@
        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 <tiles-definitions>
   
-  <definition name="common" template="/WEB-INF/layout/classic.jsp">
-    <put-attribute name="footer" value="/WEB-INF/layout/footer.jsp" />
+  <definition name="common" template="/WEB-INF/layouts/classic.jsp">
+    <put-attribute name="footer" value="/WEB-INF/layouts/footer.jsp" />
   </definition>
   
   <definition name="index" extends="common" >
     <put-attribute name="title" value="Dictionnaire Francais-Mashi" />
-    <put-attribute name="body" value="/WEB-INF/jsp/index.jsp" />
+    <put-attribute name="body" value="/WEB-INF/views/index.jsp" />
     <put-attribute name="current" value="index" />
   </definition>
   
    <definition name="users" extends="common" >
     <put-attribute name="title" value="Utilisateurs" />
-    <put-attribute name="body" value="/WEB-INF/jsp/users.jsp" />
+    <put-attribute name="body" value="/WEB-INF/views/users.jsp" />
     <put-attribute name="current" value="users" />
    </definition>
    
    <definition name="user-details" extends="common" >
     <put-attribute name="title" value="User Details" />
-    <put-attribute name="body" value="/WEB-INF/jsp/user-details.jsp" />
+    <put-attribute name="body" value="/WEB-INF/views/user-details.jsp" />
     <put-attribute name="current" value="user-details" />
    </definition>
   

@@ -1,6 +1,8 @@
 package net.francais.mashi.dic.entity;
 
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,26 +10,36 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity(name="dic_example")
 public class Example {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private Integer id;
+	private Long id;
 	@Column(name="txt_francais", nullable=false)
 	private String txtFrancais;
 	@Column(name="txt_mashi", nullable=false)
 	private String txtMashi;
+	@Column(nullable=false)
+	@JoinColumn
+	private User addedBy;
+	@Column(nullable=false)
+	@Temporal(TemporalType.DATE)
+	private Date created;
+	@Column(nullable=false)
+	@Temporal(TemporalType.DATE)
+	private Date updated;
 	@OneToOne
 	@JoinColumn(name="mot_mashi")
 	private MotMashi motMashi;
 	
 	
-	public Integer getId() {
+	public Long getId() {
 		return id;
-	}
-	public void setId(Integer id) {
-		this.id = id;
 	}
 	public String getTxtFrancais() {
 		return txtFrancais;
@@ -48,39 +60,42 @@ public class Example {
 		this.motMashi = motMashi;
 	}
 	
+	public User getAddedBy() {
+		return addedBy;
+	}
+	public void setAddedBy(User addedBy) {
+		this.addedBy = addedBy;
+	}
+	public Date getCreated() {
+		return created;
+	}
+
+	public Date getUpdated() {
+		return updated;
+	}
+	
+	private void setUpdated(Date date) {
+		this.updated= date;
+	}
+	private void setCreated(Date date) {
+		this.created= date;
+	}
+		
+	@PrePersist
+    public void prePersist(){
+        Date now  = new Date();
+        this.setCreated(now);
+        this.setUpdated(now); 
+    }
+    
+	@PreUpdate
+    public void preUpdate(){
+        this.setUpdated(new Date()); 
+    }
+	
 	@Override
 	public String toString() {
 		return "Example [id=" + id + ", motMashi=" + motMashi.getMot() + "]";
-	}
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result
-				+ ((motMashi == null) ? 0 : motMashi.hashCode());
-		return result;
-	}
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Example other = (Example) obj;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		if (motMashi == null) {
-			if (other.motMashi != null)
-				return false;
-		} else if (!motMashi.equals(other.motMashi))
-			return false;
-		return true;
 	}
 	
 }

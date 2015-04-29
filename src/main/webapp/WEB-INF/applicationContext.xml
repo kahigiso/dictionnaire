@@ -15,8 +15,9 @@
 		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
 	</context:component-scan>
 	
+	<!-- Configuration HSQL DB -->
 	<jdbc:embedded-database type="HSQL" id="dataSource" />
-	
+		
 	<bean class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean" id="emf">
 		<property name="packagesToScan" value="net.francais.mashi.dic.entity"/>
 		<property name="dataSource" ref="dataSource"/>

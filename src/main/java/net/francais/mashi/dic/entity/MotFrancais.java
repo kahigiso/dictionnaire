@@ -3,11 +3,12 @@ package net.francais.mashi.dic.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
-@Entity(name="dic_mot_francais")
+@Entity
 public class MotFrancais extends Mot{
 	
 	@Column(unique=true)
@@ -18,7 +19,8 @@ public class MotFrancais extends Mot{
 	@ManyToOne
 	@JoinColumn(nullable = false)
 	private Nature nature;
-	@OneToOne(mappedBy="motFrancais")
+	@OneToOne(mappedBy="motFrancais",fetch=FetchType.EAGER)
+	@JoinColumn(nullable=true)
 	private MotMashi motMashi;
 	
 	public String getPrecision() {
@@ -46,6 +48,7 @@ public class MotFrancais extends Mot{
 	public void setMotMashi(MotMashi motMashi) {
 		this.motMashi = motMashi;
 	}
+
 	
 	@Override
 	public String toString() {

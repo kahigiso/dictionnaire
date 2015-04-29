@@ -1,18 +1,25 @@
 package net.francais.mashi.dic.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
-@Entity(name = "dic_mot_mashi")
+@Entity
 public class MotMashi extends Mot{
 
+	@Column(nullable=true)
 	private String origine;
+	@Column(nullable=true)
 	private String imageUrl;
-	private String singlier;
+	@Column(nullable=true)
+	private String singulier;
+	@Column(nullable=true)
 	private String pluriel;
-	@OneToOne(mappedBy="motMashi")
+	@OneToOne(mappedBy="motMashi", fetch=FetchType.EAGER)
+	@JoinColumn(nullable=true)
 	private Example example;
 	@ManyToOne
 	@JoinColumn(name = "langue_origine", nullable = true)
@@ -46,12 +53,12 @@ public class MotMashi extends Mot{
 		this.imageUrl = imageUrl;
 	}
 
-	public String getSinglier() {
-		return singlier;
+	public String getSingulier() {
+		return singulier;
 	}
 
-	public void setSinglier(String singlier) {
-		this.singlier = singlier;
+	public void setSingulier(String singulier) {
+		this.singulier = singulier;
 	}
 
 	public String getPluriel() {
@@ -78,7 +85,7 @@ public class MotMashi extends Mot{
 	public void setExample(Example example) {
 		this.example = example;
 	}
-
+	
 	@Override
 	public String toString() {
 		return "MotMashi [id=" + super.getMot() + ", mot=" + super.getMot() + ", motFrancais="
