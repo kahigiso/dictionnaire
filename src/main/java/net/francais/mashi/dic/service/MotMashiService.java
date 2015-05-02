@@ -16,8 +16,8 @@ public class MotMashiService {
 	@Autowired
 	private MotMashiRepository motMashiRepository;
 	
-	public void createOrUpdate(MotMashi motMashi) {
-		motMashiRepository.save(motMashi);
+	public MotMashi createOrUpdate(MotMashi motMashi) {
+		return motMashiRepository.save(motMashi);
 	}
 	
 	//For data initialization purpose only

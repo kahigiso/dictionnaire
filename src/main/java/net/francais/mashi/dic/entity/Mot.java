@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Temporal;
@@ -25,8 +26,8 @@ public class Mot {
 	private Long id;
 	@Column(nullable=false)
 	private String mot;
-	@Column(nullable=false)
-	@JoinColumn
+	@OneToOne
+	@JoinColumn(nullable=false)
 	private User addedBy;
 	@Column(nullable=false)
 	@Temporal(TemporalType.DATE)

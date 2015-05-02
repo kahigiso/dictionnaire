@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Temporal;
@@ -31,8 +32,8 @@ public class Domaine {
 	private String name;
 	@Column(unique=true)
 	private String abbreviation;
-	@Column(nullable=false)
-	@JoinColumn
+	@OneToOne
+	@JoinColumn(nullable=false)
 	private User addedBy;
 	@Column(nullable=false)
 	@Temporal(TemporalType.DATE)

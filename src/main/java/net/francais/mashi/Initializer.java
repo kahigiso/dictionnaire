@@ -57,10 +57,54 @@ public class Initializer {
 		createDomaine();
 		createNature();
 		createLangueOrigine();
+		createMotFrancais();
+		createMotMashi();
+		createMotExample();
 		System.out.println("=====================Finish adding data================");
 	}
 	
+	
+	private void createMotExample(){
+		newExample(motMashiService.findByMot("NDWALA"), "La pauvreté est une maladie.", "Obukenyi ndwala.");
+		newExample(motMashiService.findByMot("CIBAGIRO"), "Elle (la vache) pense que c'est de l'amour, pourtant c'est à l'abattoir qu'on l'amène.", "Enamanye mpu busime n'obwo ecibagiro bayiheka.");
+		newExample(motMashiService.findByMot("LUJUCI"), "Laisse l'abeiller manger son miel.", "Olek'olujuci lulye obuci bwalo");
+	}
+	
+	private void createMotMashi(){
+		newMotMashi("BUTULI","","", "", "",natureService.findByName("Adverbe"), null,motFrancaisService.findByMot("A L'ENVERS"));
+		newMotMashi("NDWALA","","", "ENDWALA","ENDWALA", natureService.findByName("Nom commun"), null,motFrancaisService.findByMot("MALADIE"));
+		newMotMashi("KURHENGA","","", "", "",natureService.findByName("Adverbe"), null,motFrancaisService.findByMot("A PARTIR DE"));
+		newMotMashi("NTONDENTONDE","","", "","", natureService.findByName("Adverbe"), null,motFrancaisService.findByMot("A PETITS PAS"));
+		newMotMashi("CIBAGIRO","","", "ECIBAGIRO","EBIBAGIRO", natureService.findByName("Nom commun"), null,motFrancaisService.findByMot("ABATTOIR"));
+		newMotMashi("KUBAGA","","", "","", natureService.findByName("Verbe"), null,motFrancaisService.findByMot("ABATTRE"));
+		newMotMashi("KUKUBA","","", "","", natureService.findByName("Verbe"), null,motFrancaisService.findByMot("ABATTRE"));
+		newMotMashi("MASIRA","","", "AMASIRA","AMASIRA", natureService.findByName("Nom commun"), null,motFrancaisService.findByMot("ABCES"));
+		newMotMashi("SIDA","","VIH SIDA", "ESIDA","AMASIDA", natureService.findByName("Nom commun"), langueOrigineService.findByName("FRANCAIS"),motFrancaisService.findByMot("SIDA"));
+		newMotMashi("LUJUCI","","", "OLUJUCI","ENJUCI", natureService.findByName("Nom commun"), null,motFrancaisService.findByMot("ABEILLE"));
+		newMotMashi("LUFABE","","ALPHABET", "OLUFABE", "AMALUFABE",natureService.findByName("Nom commun"), langueOrigineService.findByName("FRANCAIS"),motFrancaisService.findByMot("ALPHABET"));
+		newMotMashi("KULUGA","","", "", "",natureService.findByName("Verbe"), null,motFrancaisService.findByMot("ABONDER"));
+		newMotMashi("KUMOKA","","", "", "",natureService.findByName("Verbe"), null,motFrancaisService.findByMot("ABOYER"));
+		
+		
+	}
+	
+	private void createMotFrancais(){
+		newMotFrancais("A L'ENVERS","",domaineService.findByName("ADVERBE"));
+		newMotFrancais("MALADIE","",domaineService.findByName("MEDECINE"));
+		newMotFrancais("A PARTIR DE","",domaineService.findByName("ADVERBE"));
+		newMotFrancais("A PETITS PAS","LENTEMENT",domaineService.findByName("ADVERBE"));
+		newMotFrancais("ABATTOIR","",null);
+		newMotFrancais("ABATTRE","_DU BETAIL",null);
+		newMotFrancais("ABATTRE","_UN ARBRE OU UNE GRANDE CHOSE",domaineService.findByName("FORET"));
+		newMotFrancais("ABCES","",domaineService.findByName("MEDECINE"));
+		newMotFrancais("SIDA","VIH",domaineService.findByName("MEDECINE"));
+		newMotFrancais("ABEILLE","",domaineService.findByName("ZOOLOGIE"));
+		newMotFrancais("ALPHABET","",domaineService.findByName("GRAMMAIRE"));
+		newMotFrancais("ABONDER","ÊTRE NOMBREUX",domaineService.findByName("PHYSIQUE"));
+		newMotFrancais("ABOYER","",domaineService.findByName("ZOOLOGIE"));
+	}
 
+		
 	private void createLangueOrigine(){
 		newLangueOrigine("ANGLAIS","EN");
 		newLangueOrigine("ARABE","AR");
@@ -109,6 +153,8 @@ public class Initializer {
 		newDomaine("MEDECINE");
 		newDomaine("MILITAIRE");
 		newDomaine("MUSIQUE");
+		newDomaine("ZOOLOGIE");
+		newDomaine("PHYSIQUE");
 	}
 	
 	private void createUser(){
@@ -118,54 +164,58 @@ public class Initializer {
 	
 	private void createRole(){
 		 newRole("ROLE_ADMIN");
+		 newRole("ROLE_MANAGER");
 		 newRole("ROLE_USER");
 	}
 	
 	
-	private Example newExample(MotMashi motMashi, String txtFrancais, String txtMashi){
+	private void newExample(MotMashi motMashi, String txtFrancais, String txtMashi){
 		Example example = new Example();
 		example.setMotMashi(motMashi);
 		example.setTxtFrancais(txtFrancais);
 		example.setTxtMashi(txtMashi);
 		example.setAddedBy(userService.findByEmail("admin@gmail.com"));
-		return exampleService.createOrUpdate(example);
+		exampleService.createOrUpdate(example);
 		
 	}
 	
-	private void newMotMashi(String mot, String precision,String origine, String pluriel, LangueOrigine langueOrigine, MotFrancais motFrancais){
+	private void newMotMashi(String mot, String precision,String origine, String singulier, String pluriel, Nature nature, LangueOrigine langueOrigine, MotFrancais motFrancais){
 		MotMashi motMashi = new MotMashi();
-		motMashi.setLangueOrigine(langueOrigine);
 		motMashi.setMot(mot);
 		motMashi.setOrigine(origine);
 		motMashi.setPluriel(pluriel);
+		motMashi.setSingulier(singulier);
+		motMashi.setNature(nature);
+		motMashi.setLangueOrigine(langueOrigine);
 		motMashi.setMotFrancais(motFrancais);
 		motMashi.setAddedBy(userService.findByEmail("admin@gmail.com"));
-		motMashiService.createOrUpdate(motMashi);
+		
+		motMashi = motMashiService.createOrUpdate(motMashi);
+		
 		motFrancais.setMotMashi(motMashi);
 		motFrancaisService.createOrUpdate(motFrancais);
+		nature.addMotMashi(motMashi);
+		natureService.createOrUpdate(nature);
 	}
 	
 	
-	private void newMotFrancais(String mot, String precision, Domaine domaine, Nature nature){
+	private void newMotFrancais(String mot, String precision, Domaine domaine){
 		MotFrancais motFrancais = new MotFrancais();
-		motFrancais.setDomaine(domaine);
-		motFrancais.setNature(nature);
 		motFrancais.setMot(mot);
 		motFrancais.setPrecision(precision);
+		motFrancais.setDomaine(domaine);
+		motFrancais.setAddedBy(userService.findByEmail("admin@gmail.com"));
 		motFrancais = motFrancaisService.createOrUpdate(motFrancais);
 		domaine.addMotFrancais(motFrancais);
-		nature.addMotFrancais(motFrancais);
-		nature.setAddedBy(userService.findByEmail("admin@gmail.com"));
-		natureService.createOrUpdate(nature);
 		domaineService.createOrUpdate(domaine);
 	}
 	
-	private LangueOrigine newLangueOrigine(String name, String abbreviation){
+	private void newLangueOrigine(String name, String abbreviation){
 		LangueOrigine lOrigine = new LangueOrigine();
 		lOrigine.setName(name);
 		lOrigine.setAbbreviation(abbreviation);
 		lOrigine.setAddedBy(userService.findByEmail("admin@gmail.com"));
-		return langueOrigineService.createOrUpdate(lOrigine);
+		langueOrigineService.createOrUpdate(lOrigine);
 	}
     private void newDomaine(String name){
     	Domaine domaine = new Domaine();

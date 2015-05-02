@@ -16,9 +16,6 @@ public class MotFrancais extends Mot{
 	@ManyToOne
 	@JoinColumn(nullable = false)
 	private Domaine domaine;
-	@ManyToOne
-	@JoinColumn(nullable = false)
-	private Nature nature;
 	@OneToOne(mappedBy="motFrancais",fetch=FetchType.EAGER)
 	@JoinColumn(nullable=true)
 	private MotMashi motMashi;
@@ -34,13 +31,6 @@ public class MotFrancais extends Mot{
 	}
 	public void setDomaine(Domaine domaine) {
 		this.domaine = domaine;
-	}
-	
-	public Nature getNature() {
-		return nature;
-	}
-	public void setNature(Nature nature) {
-		this.nature = nature;
 	}
 	public MotMashi getMotMashi() {
 		return motMashi;

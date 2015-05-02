@@ -8,26 +8,28 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 @Entity
-public class MotMashi extends Mot{
+public class MotMashi extends Mot {
 
-	@Column(nullable=true)
+	@Column(nullable = true)
 	private String origine;
-	@Column(nullable=true)
+	@Column(nullable = true)
 	private String imageUrl;
-	@Column(nullable=true)
+	@Column(nullable = true)
 	private String singulier;
-	@Column(nullable=true)
+	@Column(nullable = true)
 	private String pluriel;
-	@OneToOne(mappedBy="motMashi", fetch=FetchType.EAGER)
-	@JoinColumn(nullable=true)
+	@OneToOne(mappedBy = "motMashi", fetch = FetchType.EAGER)
+	@JoinColumn(nullable = true)
 	private Example example;
 	@ManyToOne
 	@JoinColumn(name = "langue_origine", nullable = true)
 	private LangueOrigine langueOrigine;
+	@ManyToOne
+	@JoinColumn(nullable = false)
+	private Nature nature;
 	@OneToOne
-	@JoinColumn(name="mot_francais")
+	@JoinColumn(name = "mot_francais")
 	private MotFrancais motFrancais;
-
 
 	public MotFrancais getMotFrancais() {
 		return motFrancais;
@@ -36,7 +38,7 @@ public class MotMashi extends Mot{
 	public void setMotFrancais(MotFrancais motFrancais) {
 		this.motFrancais = motFrancais;
 	}
-	
+
 	public String getOrigine() {
 		return origine;
 	}
@@ -76,7 +78,14 @@ public class MotMashi extends Mot{
 	public void setLangueOrigine(LangueOrigine langueOrigine) {
 		this.langueOrigine = langueOrigine;
 	}
-	
+
+	public Nature getNature() {
+		return nature;
+	}
+
+	public void setNature(Nature nature) {
+		this.nature = nature;
+	}
 
 	public Example getExample() {
 		return example;
@@ -85,10 +94,10 @@ public class MotMashi extends Mot{
 	public void setExample(Example example) {
 		this.example = example;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "MotMashi [id=" + super.getMot() + ", mot=" + super.getMot() + ", motFrancais="
-				+ motFrancais + "]";
+		return "MotMashi [id=" + super.getMot() + ", mot=" + super.getMot()
+				+ ", motFrancais=" + motFrancais + "]";
 	}
 }
