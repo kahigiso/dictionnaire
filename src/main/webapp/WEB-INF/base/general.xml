@@ -4,26 +4,26 @@
        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 <tiles-definitions>
   
-  <definition name="common" template="/WEB-INF/layouts/classic.jsp">
+  <definition name="main" template="/WEB-INF/layouts/main.jsp">
     <put-attribute name="footer" value="/WEB-INF/layouts/footer.jsp" />
   </definition>
   
-  <definition name="index" extends="common" >
+  <definition name="index" extends="main" >
     <put-attribute name="title" value="Dictionnaire Francais-Mashi" />
     <put-attribute name="body" value="/WEB-INF/views/index.jsp" />
     <put-attribute name="current" value="index" />
   </definition>
   
-   <definition name="users" extends="common" >
-    <put-attribute name="title" value="Utilisateurs" />
-    <put-attribute name="body" value="/WEB-INF/views/users.jsp" />
-    <put-attribute name="current" value="users" />
+   <definition name="about" extends="main" >
+    <put-attribute name="title" value="A propos - Dictionnaire Francais-Mashi" />
+    <put-attribute name="body" value="/WEB-INF/views/about.jsp" />
+    <put-attribute name="current" value="about" />
    </definition>
    
-   <definition name="user-details" extends="common" >
-    <put-attribute name="title" value="User Details" />
-    <put-attribute name="body" value="/WEB-INF/views/user-details.jsp" />
-    <put-attribute name="current" value="user-details" />
+   <definition name="contact" extends="common" >
+    <put-attribute name="title" value="Contact nous - Dictionnaire Francais-Mashi" />
+    <put-attribute name="body" value="/WEB-INF/views/contact.jsp" />
+    <put-attribute name="current" value="contact" />
    </definition>
   
 </tiles-definitions>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+  
+  <definition name="admin" template="/WEB-INF/layouts/admin.jsp">
+    <put-attribute name="footer" value="/WEB-INF/layouts/footer.jsp" />
+  </definition>
+  
+  <definition name="dashboard" extends="admin" >
+    <put-attribute name="title" value="Dashboard - Dictionnaire Francais-Mashi" />
+    <put-attribute name="body" value="/WEB-INF/views/admin/dashboard.jsp" />
+    <put-attribute name="current" value="dashboard" />
+  </definition>
+  
+   <definition name="nature" extends="admin" >
+    <put-attribute name="title" value="Nature - Dictionnaire Francais-Mashi" />
+    <put-attribute name="body" value="/WEB-INF/views/admin/nature.jsp" />
+    <put-attribute name="current" value="nature" />
+  </definition>
+  
+   <definition name="domaine" extends="admin" >
+    <put-attribute name="title" value="Domaine - Dictionnaire Francais-Mashi" />
+    <put-attribute name="body" value="/WEB-INF/views/admin/domaine.jsp" />
+    <put-attribute name="current" value="domaine" />
+  </definition>
+  
+</tiles-definitions>

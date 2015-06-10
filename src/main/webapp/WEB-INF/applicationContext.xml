@@ -19,7 +19,7 @@
 	<jdbc:embedded-database type="HSQL" id="dataSource" />
 		
 	<bean class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean" id="emf">
-		<property name="packagesToScan" value="net.francais.mashi.dic.entity"/>
+		<property name="packagesToScan" value="net.francais.mashi.dic.entities"/>
 		<property name="dataSource" ref="dataSource"/>
 		<property name="jpaProperties">
 			<props>
@@ -35,5 +35,5 @@
 	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
 		<property name="dataSource" ref="dataSource"/>
 	</bean>
-	<jpa:repositories base-package="net.francais.mashi.dic.repository" entity-manager-factory-ref="emf" transaction-manager-ref="transactionManager"/> 
+	<jpa:repositories base-package="net.francais.mashi.dic.repositories" entity-manager-factory-ref="emf" transaction-manager-ref="transactionManager"/> 
 </beans>
